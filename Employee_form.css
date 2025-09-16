@@ -1,0 +1,520 @@
+/* Reset and base styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+    background: radial-gradient(
+        circle,
+        rgba(239, 119, 34, 1) 0%,
+        rgba(235, 235, 235, 1) 72%,
+        rgba(11, 166, 223, 1) 100%
+    );
+}
+
+/* Animated background */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    animation: gradientMove 15s ease infinite;
+    background: inherit;
+    background-size: 200% 200%;
+}
+
+.wave {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.1)"></path></svg>');
+    background-size: 1200px 100px;
+    animation: wave 12s linear infinite;
+    z-index: -1;
+}
+.wave:nth-child(2) {
+    bottom: 10px;
+    animation-duration: 10s;
+    opacity: 0.5;
+    background-size: 1100px 100px;
+}
+.wave:nth-child(3) {
+    bottom: 20px;
+    animation-duration: 8s;
+    opacity: 0.3;
+    background-size: 1000px 100px;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+        background-size: 150% 150%;
+    }
+    25% {
+        background-size: 180% 180%;
+    }
+    50% {
+        background-position: 100% 50%;
+        background-size: 200% 200%;
+    }
+    75% {
+        background-size: 180% 180%;
+    }
+    100% {
+        background-position: 0% 50%;
+        background-size: 150% 150%;
+    }
+}
+@keyframes wave {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 1200px;
+    }
+}
+
+/* Info box */
+.info {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #fff;
+    z-index: -1;
+}
+
+/* Layout containers */
+.outer {
+    margin: 5% auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+.inner {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Form styles with turn transition */
+#showFormBtn {
+    padding: 12px 24px;
+    background: #3396D3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    transition: background 0.3s;
+    z-index: 2;
+    position: relative;
+}
+#showFormBtn:hover {
+    background: #2576a8;
+    transform: translateY(-2px);
+}
+
+.form {
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.form-group label {
+    font-weight: bold;
+    width: 150px;
+}
+.form-group input,
+.form-group select {
+    flex: 1;
+    padding: 8px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.form-action {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* Validation styles */
+input.invalid,
+select.invalid {
+    border: 2px solid #ff2d2d;
+    background: #fcebeb;
+}
+input.valid,
+select.valid {
+    border: 2px solid #2d8a2d;
+    background: #F8FAFC;
+}
+
+/* Button styles */
+#submit,
+.edit-btn,
+#rst,
+.delete-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+#submit,
+.edit-btn {
+    background: #3396D3;
+}
+#submit:hover,
+.edit-btn:hover {
+    background: #2576a8;
+    transform: translateY(-2px);
+}
+#rst,
+.delete-btn {
+    background: darkgray;
+}
+#rst:hover,
+.delete-btn:hover {
+    background: #747474;
+    transform: translateY(-2px);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* Table Styles */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+
+}
+thead tr {
+    background: #3396D3;
+    color: #fff;
+    font-size: 1.1em;
+}
+th,
+td {
+    padding: 12px 18px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+}
+th {
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+tbody tr {
+    transition: background 0.2s;
+}
+tbody tr:hover {
+    background: #f2f8fc;
+}
+tbody tr:last-child td {
+    border-bottom: none;
+}
+td {
+    font-size: 1em;
+    color: #333;
+}
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: #fff;
+    margin: 5% auto;
+    padding: 2rem;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+    animation: slideIn 0.3s;
+}
+
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Form Modal specific styles */
+.form-modal {
+    width: 500px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.form-modal h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Ensure form fits well in modal */
+.form-modal .form {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.modal .close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.modal .close-btn:hover,
+.modal .close-btn:focus {
+    color: #333;
+}
+.modal-content button {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.modal-content button:hover {
+    background: #c0392b;
+}
+#formModal {
+  backdrop-filter: blur(5px);
+}
+
+/* Pagination styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 5px;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #f0f0f0;
+}
+
+.pagination button.active {
+    background: #3396D3;
+    color: white;
+    border-color: #3396D3;
+}
+
+.pagination button:disabled {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* Pagination controls and dropdown styles */
+#pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 15px auto;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+#pagination-controls button {
+    padding: 6px 14px;
+    border-radius: 5px;
+    border: none;
+    background: #3396D3;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#pagination-controls button.active {
+    background: #2576a8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+#pagination-controls button:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}
+#pagination-controls button:hover:not(:disabled) {
+  background: #2576a8;
+}
+
+.pagination-dropdown {
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #3396D3;
+    font-size: 0.9em;
+    margin-right: 12px;
+    background: #f8faff;
+    color: #2576a8;
+    font-weight: bold;
+    cursor: pointer;
+    transition: border 0.2s;
+}
+.pagination-dropdown:focus {
+    border-color: #2576a8;
+    outline: none;
+}
+/* Rows per page selector styles */
+.rows-per-page-container {
+  display: flex;
+  align-items: center;
+  margin: 15px 5% 5px;
+  justify-content: flex-end;
+  width: 90%;
+  border-radius: 5px;
+}
+
+.rows-per-page-container label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .outer,
+    .inner,
+    table {
+        margin-top: 10% !important;
+        width: 95% !important;
+        font-size: 1rem;
+    }
+    .form-modal {
+        width: 95% !important;
+        padding: 1rem;
+    }
+    .form-modal .form-group,
+    .form-modal .form-action {
+        flex-direction: column;
+        width: 100%;
+    }
+    .form-modal .form-group label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    table th,
+    table td {
+        padding: 0.5rem;
+        border-radius: 10px;
+    }
+    .modal-content {
+        width: 90vw;
+        margin: 20% auto;
+        padding: 1rem;
+    }
+    .info {
+        display: none;
+    }
+    
+    /* Adjust turn animation for mobile */
+    .action-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .rows-per-page-container {
+    justify-content: center;
+    margin: 10px auto;
+  }
+  .rows-per-page-container label {
+    font-size: 0.8rem;
+  }
+  
+  .pagination-dropdown {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+  
+  #pagination-controls {
+    gap: 5px;
+  }
+  
+  #pagination-controls button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
